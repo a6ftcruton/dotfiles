@@ -18,6 +18,8 @@ Plugin 'git://git.wincent.com/command-t.git'
 
 Plugin 'scrooloose/nerdtree.git'
 
+Plugin 'scrooloose/syntastic'
+
 Plugin 'flazz/vim-colorschemes'
  
 Plugin 'kien/ctrlp.vim'
@@ -121,6 +123,7 @@ inoremap jf <esc>
 nnoremap ; :
 vnoremap ; :
 
+runtime macros/matchit.vim
 "insert and remove comments in visual and normal mode
 vmap ,ic :s/^/#/g<CR>:let @/ = ""<CR>
 map  ,ic :s/^/#/g<CR>:let @/ = ""<CR>
@@ -177,3 +180,12 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=236
  "====== mustache-handlebars ======= "
 let g:mustache_abbreviations = 1
 
+" ===== syntastic ===== "
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
