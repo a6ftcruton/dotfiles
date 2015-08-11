@@ -56,6 +56,7 @@ Plugin 'tpope/vim-dispatch'
 
  Plugin 'sjl/gundo.vim'
 
+ Plugin 'nelstrom/vim-textobj-rubyblock'
 " ——————————————————————— END Plugins ———————————————————————
 call vundle#end()            " required
 filetype plugin indent on    " required
