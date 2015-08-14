@@ -56,6 +56,8 @@ Plugin 'tpope/vim-dispatch'
 
  Plugin 'sjl/gundo.vim'
 
+ Plugin 'kana/vim-textobj-user'
+
  Plugin 'nelstrom/vim-textobj-rubyblock'
 " ——————————————————————— END Plugins ———————————————————————
 call vundle#end()            " required
@@ -174,6 +176,19 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=236
 
  " ====== Search Highlight ====== "
  hi Search cterm=NONE ctermfg=grey ctermbg=blue
+
+ " ===== Line Number Toggling ====== "
+function! NumberToggle()
+  if (&relativenumber == 1)
+    set norelativenumber
+    set number
+  else
+    set nonumber
+    set relativenumber
+  endif
+endfunc
+
+nnoremap <Leader>r :call NumberToggle()<cr>
 
  "======  gundo =======
  nnoremap <F5> :GundoToggle<CR>
