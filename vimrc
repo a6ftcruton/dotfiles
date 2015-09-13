@@ -155,15 +155,38 @@ map <Leader>a :call RunAllSpecs()<CR>
 " =====================   NERDTree   =====================
 " Trigger configuration. Do not use <tab> if 
 " you use https://github.com/Valloric/YouCompleteMe.
- let g:UltiSnipsExpandTrigger="<tab>"
- let g:UltiSnipsJumpForwardTrigger="<c-b>"
- let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-" =====================   NERDTree   =====================
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 map <C-n> :NERDTreeToggle<CR>   
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 let NERDTreeShowHidden=1
+
+" =====================   Airline   =====================
+set laststatus=2                                       " Make the second to last line of vim our status line
+let g:airline_theme='lucius'                           " Use lucius theme
+let g:airline#extensions#branch#enabled = 1            " Show the git branch in the status line
+let g:airline#extensions#tabline#show_buffers = 0      " Do not list buffers in the status line
+let g:airline#extensions#whitespace#enabled = 0        " Do not show trailing whitespace errors
+let g:airline#extensions#ctrlp#show_adjacent_modes = 0 " Do not show mru, buffer, etc.
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.whitespace = 'Ξ'
+
 
 " =====================   Color Scheme   =====================
 colorscheme Tomorrow-Night-Eighties
@@ -197,12 +220,14 @@ nnoremap <Leader>r :call NumberToggle()<cr>
 let g:mustache_abbreviations = 1
 
 " ===== syntastic ===== "
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_quiet_messages = { "type": "style" }
+" let g:syntastic_ruby_checkers = ['rubocop', 'mri']
 
 nnoremap <Leader>sr :SyntasticReset<CR>
