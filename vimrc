@@ -8,57 +8,33 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim             " set the runtime path to include Vundle and initialize
 call vundle#begin()
 
-Plugin 'gmarik/Vundle.vim'
-
-Plugin 'tpope/vim-fugitive'
-
 Plugin 'L9'                                    
-
-Plugin 'git://git.wincent.com/command-t.git'   
-
-Plugin 'scrooloose/nerdtree.git'
-
-Plugin 'scrooloose/syntastic'
-
+Plugin 'SirVer/ultisnips'
+Plugin 'bling/vim-airline'
+Plugin 'fatih/vim-go'
 Plugin 'flazz/vim-colorschemes'
- 
-Plugin 'kien/ctrlp.vim'
- 
-Plugin 'tpope/vim-commentary'
-  
-Plugin 'leshill/vim-json'
- 
-Plugin 'pangloss/vim-javascript'
- 
+Plugin 'git://git.wincent.com/command-t.git'   
+Plugin 'gmarik/Vundle.vim'
+Plugin 'honza/vim-snippets'
 Plugin 'indenthtml.vim'
- 
+Plugin 'kana/vim-textobj-user'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'kien/ctrlp.vim'
+Plugin 'leshill/vim-json'
+Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'nelstrom/vim-textobj-rubyblock'
+Plugin 'pangloss/vim-javascript'
+Plugin 'rking/ag.vim'
+Plugin 'scrooloose/nerdtree.git'
+Plugin 'scrooloose/syntastic'
+Plugin 'sjl/gundo.vim'
+Plugin 'thoughtbot/vim-rspec'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-dispatch'
+Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-markdown'
 
-Plugin 'fatih/vim-go'
-
-Plugin 'rking/ag.vim'
-
-Plugin 'bling/vim-airline'
-
-Plugin 'thoughtbot/vim-rspec'
-
-Plugin 'tpope/vim-dispatch'
-
- Plugin 'SirVer/ultisnips'
-
- Plugin 'honza/vim-snippets'
-
- Plugin 'nathanaelkane/vim-indent-guides'
- 
- Plugin 'kchmck/vim-coffee-script'
-
- Plugin 'mustache/vim-mustache-handlebars'
-
- Plugin 'sjl/gundo.vim'
-
- Plugin 'kana/vim-textobj-user'
-
- Plugin 'nelstrom/vim-textobj-rubyblock'
 " ——————————————————————— END Plugins ———————————————————————
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -220,9 +196,9 @@ nnoremap <Leader>r :call NumberToggle()<cr>
 let g:mustache_abbreviations = 1
 
 " ===== syntastic ===== "
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
