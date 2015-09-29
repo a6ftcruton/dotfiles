@@ -9,31 +9,32 @@ set rtp+=~/.vim/bundle/Vundle.vim             " set the runtime path to include 
 call vundle#begin()
 
 Plugin 'L9'                                    
-Plugin 'SirVer/ultisnips'
-Plugin 'bling/vim-airline'
-Plugin 'fatih/vim-go'
-Plugin 'flazz/vim-colorschemes'
+Plugin 'rking/ag.vim'
 Plugin 'git://git.wincent.com/command-t.git'   
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/nerdtree.git'
+Plugin 'SirVer/ultisnips'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'fatih/vim-go'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'honza/vim-snippets'
 Plugin 'indenthtml.vim'
 Plugin 'kana/vim-textobj-user'
 Plugin 'kchmck/vim-coffee-script'
-Plugin 'kien/ctrlp.vim'
 Plugin 'leshill/vim-json'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'nelstrom/vim-textobj-rubyblock'
 Plugin 'pangloss/vim-javascript'
-Plugin 'rking/ag.vim'
-Plugin 'scrooloose/nerdtree.git'
-Plugin 'scrooloose/syntastic'
 Plugin 'sjl/gundo.vim'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-markdown'
+Plugin 'bling/vim-airline'
+Plugin 'jeffkreeftmeijer/vim-numbertoggle'
+" Plugin 'scrooloose/syntastic'
 
 " ——————————————————————— END Plugins ———————————————————————
 call vundle#end()            " required
@@ -177,17 +178,7 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=236
  hi Search cterm=NONE ctermfg=grey ctermbg=blue
 
  " ===== Line Number Toggling ====== "
-function! NumberToggle()
-  if (&relativenumber == 1)
-    set norelativenumber
-    set number
-  else
-    set nonumber
-    set relativenumber
-  endif
-endfunc
-
-nnoremap <Leader>r :call NumberToggle()<cr>
+let g:NumberToggleTrigger="<F2>"
 
  "======  gundo =======
  nnoremap <F5> :GundoToggle<CR>
@@ -196,14 +187,14 @@ nnoremap <Leader>r :call NumberToggle()<cr>
 " let g:mustache_abbreviations = 1
 
 " ===== syntastic ===== "
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_quiet_messages = { "type": "style" }
-" let g:syntastic_ruby_checkers = ['rubocop', 'mri']
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_quiet_messages = { "type": "style" }
+" " let g:syntastic_ruby_checkers = ['rubocop', 'mri']
 
-nnoremap <Leader>sr :SyntasticReset<CR>
+" nnoremap <Leader>sr :SyntasticReset<CR>
