@@ -8,20 +8,17 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim             " set the runtime path to include Vundle and initialize
 call vundle#begin()
 
-Plugin 'L9'                                    
 Plugin 'rking/ag.vim'
 Plugin 'git://git.wincent.com/command-t.git'   
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'SirVer/ultisnips'
 Plugin 'flazz/vim-colorschemes'
-Plugin 'fatih/vim-go'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'honza/vim-snippets'
 Plugin 'indenthtml.vim'
 Plugin 'kana/vim-textobj-user'
 Plugin 'kchmck/vim-coffee-script'
-Plugin 'leshill/vim-json'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'nelstrom/vim-textobj-rubyblock'
@@ -34,6 +31,8 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-markdown'
 Plugin 'bling/vim-airline'
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
+Plugin 'cohama/lexima.vim'
+" Plugin 'L9'                                    
 " Plugin 'scrooloose/syntastic'
 
 " ——————————————————————— END Plugins ———————————————————————
@@ -183,6 +182,15 @@ let g:NumberToggleTrigger="<F2>"
  "======  gundo =======
  nnoremap <F5> :GundoToggle<CR>
  
+"======  ctrlp - performance  =======
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+if exists("g:ctrl_user_command")
+  unlet g:ctrlp_user_command
+endif
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/vendor/*,*/\.git/*
  "====== mustache-handlebars ======= "
 " let g:mustache_abbreviations = 1
 
