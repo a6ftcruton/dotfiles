@@ -88,12 +88,12 @@ nnoremap B ^
 nnoremap E $
 " create new vsplit, and switch to it.
 noremap <leader>v <C-w>v
- 
+
 " Navigating Split Windows
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+nnoremap <space>h <C-w>h
+nnoremap <space>j <C-w>j
+nnoremap <space>k <C-w>k
+nnoremap <space>l <C-w>l
 
 " So we don't have to reach for escape to leave insert mode.
 inoremap jf <esc>
@@ -125,7 +125,7 @@ let g:rspec_command = "!rspec --color {spec}"
 " ================ Thoughtbot/vim-rspec =================
 map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
+map <Leader>r :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 
 " =====================   NERDTree   =====================
