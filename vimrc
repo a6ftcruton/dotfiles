@@ -18,21 +18,21 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'honza/vim-snippets'
 Plugin 'indenthtml.vim'
 Plugin 'kana/vim-textobj-user'
+Plugin 'nelstrom/vim-textobj-rubyblock'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'nelstrom/vim-textobj-rubyblock'
 Plugin 'pangloss/vim-javascript'
 Plugin 'sjl/gundo.vim'
-Plugin 'thoughtbot/vim-rspec'
 Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-markdown'
 Plugin 'bling/vim-airline'
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 Plugin 'cohama/lexima.vim'
-" Plugin 'L9'                                    
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'christoomey/vim-tmux-runner' "have to manually add to .vim/bundle
+Plugin 'gabebw/vim-spec-runner'
 " Plugin 'scrooloose/syntastic'
 
 " ——————————————————————— END Plugins ———————————————————————
@@ -82,18 +82,21 @@ vnoremap // y/<C-R>"<CR>
 
 " Movement
 " allow the cursor to go anywhere in visual block mode.
-"
 set virtualedit+=block
 nnoremap B ^
 nnoremap E $
+
 " create new vsplit, and switch to it.
 noremap <leader>v <C-w>v
 
-" Navigating Split Windows
-nnoremap <space>h <C-w>h
-nnoremap <space>j <C-w>j
-nnoremap <space>k <C-w>k
-nnoremap <space>l <C-w>l
+"allow vim and tmux pane navigation to play nicely together
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> <C-H> :TmuxNavigateLeft<cr>
+nnoremap <silent> <C-J> :TmuxNavigateDown<cr>
+nnoremap <silent> <C-K> :TmuxNavigateUp<cr>
+nnoremap <silent> <C-L> :TmuxNavigateRight<cr>
+nnoremap <silent> <C-\> :TmuxNavigatePrevious<cr>
 
 " So we don't have to reach for escape to leave insert mode.
 inoremap jf <esc>
@@ -101,6 +104,9 @@ inoremap jf <esc>
 " So we don't have to press shift when we want to get into command mode.
 nnoremap ; :
 vnoremap ; :
+
+" automatically rebalance windows on vim resize
+autocmd VimResized * :wincmd =
 
 runtime macros/matchit.vim
 "insert and remove comments in visual and normal mode
@@ -121,12 +127,15 @@ map <Leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>
 set splitbelow
 set splitright
 
-let g:rspec_command = "!rspec --color {spec}"
-" ================ Thoughtbot/vim-rspec =================
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>r :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
+"vim-spec-runner
+let g:spec_runner_dispatcher = "VtrSendCommand! {command}"
+
+"run all specs in current (f)ile
+map <Leader>f <Plug>RunCurrentSpecFile 
+"run specs at current (l)ine
+map <leader>l <Plug>RunFocusedSpec
+"(r)e-run last spec
+map <leader>r <Plug>RunMostRecentSpec
 
 " =====================   NERDTree   =====================
 " Trigger configuration. Do not use <tab> if 
