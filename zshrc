@@ -1,3 +1,9 @@
+#Moved this block from zshenv b/c of slow pane movement w/ vim -> tmux
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+export PATH="$HOME/subs/bin:$PATH"
+eval "$($HOME/subs/bin/cu init -)"
+
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/jimsutton/.oh-my-zsh
 

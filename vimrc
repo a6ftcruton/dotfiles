@@ -53,7 +53,6 @@ let mapleader = ","
 
 " Modified from thrasher beginner.vimrc
 "   v0.1 2012-10-22 Philip Thrasher
-
 syntax on         " Syntax highlighting
  
 set cursorline    " highlights current cursor line
