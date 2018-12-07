@@ -27,13 +27,15 @@ Plugin 'sjl/gundo.vim'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-markdown'
+Plugin 'tpope/vim-surround'
 Plugin 'bling/vim-airline'
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 Plugin 'cohama/lexima.vim'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'christoomey/vim-tmux-runner' "have to manually add to .vim/bundle
 Plugin 'gabebw/vim-spec-runner'
-" Plugin 'scrooloose/syntastic'
+Plugin 'w0rp/ale'
+Plugin 'mattn/emmet-vim'
 
 " ——————————————————————— END Plugins ———————————————————————
 call vundle#end()            " required
@@ -140,10 +142,10 @@ map <leader>r <Plug>RunMostRecentSpec
 " Trigger configuration. Do not use <tab> if 
 " you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
-map <C-n> :NERDTreeToggle<CR>   
+map <C-n> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 let NERDTreeShowHidden=1
@@ -151,7 +153,7 @@ let NERDTreeShowHidden=1
 " =====================   Airline   =====================
 set laststatus=2                                       " Make the second to last line of vim our status line
 let g:airline_theme='lucius'                           " Use lucius theme
-let g:airline#extensions#branch#enabled = 1            " Show the git branch in the status line
+let g:airline#extensions#branch#enabled = 0            " Show the git branch in the status line
 let g:airline#extensions#tabline#show_buffers = 0      " Do not list buffers in the status line
 let g:airline#extensions#whitespace#enabled = 0        " Do not show trailing whitespace errors
 let g:airline#extensions#ctrlp#show_adjacent_modes = 0 " Do not show mru, buffer, etc.
@@ -184,6 +186,12 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=236
  " ====== Search Highlight ====== "
  hi Search cterm=NONE ctermfg=grey ctermbg=blue
 
+ "  Draw attention to trailing whitespace
+ exec "set listchars=trail:\UB7"
+ set list
+
+"TODO - VMath.vim plugin
+
  " ===== Line Number Toggling ====== "
 let g:NumberToggleTrigger="<F2>"
 
@@ -192,6 +200,7 @@ let g:NumberToggleTrigger="<F2>"
  
 "======  ctrlp - performance  =======
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+let g:ctrlp_max_height=35
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
@@ -199,18 +208,25 @@ if exists("g:ctrl_user_command")
   unlet g:ctrlp_user_command
 endif
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/vendor/*,*/\.git/*
- "====== mustache-handlebars ======= "
-" let g:mustache_abbreviations = 1
 
-" ===== syntastic ===== "
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
+"======  Ale  =======
 
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_wq = 0
-" let g:syntastic_quiet_messages = { "type": "style" }
-" " let g:syntastic_ruby_checkers = ['rubocop', 'mri']
+let g:airline#extensions#ale#enabled = 1
+let g:ale_linters = { 'jsx': ['eslint'] }
+let g:ale_fixers = {}
+let g:ale_javascript_prettier_options = '--single-quote --arrow-parens'
+let g:ale_fix_on_save = 1
+let g:ale_sign_error = '✖'
+let g:ale_sign_warning = '-'
+highlight clear ALEWarningSign " dont highlight warnings bc it is so annoying
+highlight ALEWarning ctermbg=None
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
+let g:ale_pattern_options = {
+\   '.*cypress/integration/.*\.js$': {'ale_enabled': 0},
+\   '.*cypress/integration/*/.*\.js$': {'ale_enabled': 0},
+\   '.*\.spec.js$': {'ale_enabled': 0},
+\}
 
-" nnoremap <Leader>sr :SyntasticReset<CR>
+" ------- Emmet --------
+let g:user_emmet_leader_key='<C-E>'

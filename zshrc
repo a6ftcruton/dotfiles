@@ -93,9 +93,17 @@ export DISABLE_SPRING=true
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
-# Example aliases
 alias yolo="rake db:drop; rake db:create; rake db:migrate; rake db:seed"
 alias be="bundle exec"
+alias nombom="rm -rf node_modules bower_components && npm install && bower install"
+# alias ag="ag --path-to-agignore ~/dotfiles/.agignore"
+alias exam="ember exam --split=4 --parallel"
+
+# if you have a json string copied to your clipboard, run it through jq util's pretty print and then copy that output
+# really useful for copying network json payloads to paste into jira/slack snippets/etc.
+alias ppjson="pbpaste | jq . | pbcopy"
+
+# Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
@@ -276,3 +284,9 @@ function change-around {
   zle vi-insert
 }
 zle -N change-around
+export PATH="/usr/local/sbin:$PATH"
+
+#Get rid of stupid spring in rails forever and ever
+export DISABLE_SPRING=1
+
+export AWS_REGION="us-west-2"
