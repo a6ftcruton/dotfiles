@@ -1,8 +1,6 @@
 #Moved this block from zshenv b/c of slow pane movement w/ vim -> tmux
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
-export PATH="$HOME/subs/bin:$PATH"
-eval "$($HOME/subs/bin/cu init -)"
 
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/jimsutton/.oh-my-zsh
@@ -60,15 +58,8 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 
 source $ZSH/oh-my-zsh.sh
 
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
 eval "$(direnv hook $SHELL)"
 
-export MYSQL=/usr/local/opt/mysql55
-export PATH=$PATH:$MYSQL/bin
-
-export PATH="$HOME/subs/bin:$PATH"
-eval "$($HOME/subs/bin/cu init -)"
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -107,9 +98,10 @@ alias ppjson="pbpaste | jq . | pbcopy"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export NVM_DIR="/Users/jimsutton/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
+# export NVM_DIR="/Users/jimsutton/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+export NVM_DIR=~/.nvm
+source ~/.nvm/nvm.sh
 
 # VIM MODE IN SHELL
 # -----------------
@@ -290,3 +282,9 @@ export PATH="/usr/local/sbin:$PATH"
 export DISABLE_SPRING=1
 
 export AWS_REGION="us-west-2"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/jimsutton/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/jimsutton/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/jimsutton/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/jimsutton/Downloads/google-cloud-sdk/completion.zsh.inc'; fi

@@ -14,6 +14,7 @@
     cob = checkout -b
     m = merge
     st = status
+    fwl = --force-with-lease
     b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
     hist = log --pretty=format:'%C(yellow)%h %C(white)%ad' --graph --date=short
     l = log --pretty=format:"%C(white)%h\\ %C(magenta)%ad%Cred%d\\ %Creset%s%Cgreen\\ [%cn]" --decorate --date=short
@@ -21,11 +22,13 @@
     la = "!git config -l | grep alias | cut -c 7-"
     type = cat-file -t
     dump = cat-file -p
+    pfwl = push --force-with-lease
     dl1 = diff HEAD^..HEAD
     dl2 = diff HEAD^^..HEAD
     dl3 = diff HEAD^^^..HEAD
 [core]
 	editor = /usr/bin/vim
+	excludesfile = /Users/jimsutton/.gitignore_global
 [push]
 	default = simple
 

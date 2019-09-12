@@ -3,18 +3,19 @@
 
 set nocompatible              " required
 filetype off                  " required
+set exrc                      " allow project specific vimrc
 
 " ———————————————————————  PLUGINS  ———————————————————————
-set rtp+=~/.vim/bundle/Vundle.vim             " set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim   " set the runtime path to include Vundle and initialize
 call vundle#begin()
+Plugin 'gmarik/Vundle.vim'
 
 Plugin 'rking/ag.vim'
-Plugin 'git://git.wincent.com/command-t.git'   
+Plugin 'git://git.wincent.com/command-t.git'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'SirVer/ultisnips'
 Plugin 'flazz/vim-colorschemes'
-Plugin 'gmarik/Vundle.vim'
 Plugin 'honza/vim-snippets'
 Plugin 'indenthtml.vim'
 Plugin 'kana/vim-textobj-user'
@@ -28,7 +29,8 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-markdown'
 Plugin 'tpope/vim-surround'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 Plugin 'cohama/lexima.vim'
 Plugin 'christoomey/vim-tmux-navigator'
@@ -36,6 +38,8 @@ Plugin 'christoomey/vim-tmux-runner' "have to manually add to .vim/bundle
 Plugin 'gabebw/vim-spec-runner'
 Plugin 'w0rp/ale'
 Plugin 'mattn/emmet-vim'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'chrisbra/NrrwRgn'
 
 " ——————————————————————— END Plugins ———————————————————————
 call vundle#end()            " required
@@ -118,6 +122,7 @@ map  ,rc :s/^#//g<CR>:let @/ = ""<CR>
 
 set clipboard=unnamed " requires x11 support
 set relativenumber
+set number norelativenumber " numbertoggle
 set nobackup
 set nowritebackup
 set noswapfile
@@ -138,31 +143,54 @@ map <leader>l <Plug>RunFocusedSpec
 "(r)e-run last spec
 map <leader>r <Plug>RunMostRecentSpec
 
-" =====================   NERDTree   =====================
+" =====================   UltiSnips   =====================
 " Trigger configuration. Do not use <tab> if 
 " you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsSnippetsDir="~/.vim/ultisnips"
+let g:UltiSnipsSnippetDirectories=["ultisnips"]
 
+" =====================   NERDTree   =====================
+" Trigger configuration. Do not use <tab> if 
+" you use https://github.com/Valloric/YouCompleteMe.
 map <C-n> :NERDTreeToggle<CR>
+
+let g:NERDTreeNodeDelimiter = "\u00a0"
+let NERDTreeShowHidden=1
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+let NERDTreeQuitOnOpen = 1
+let NERDTreeAutoDeleteBuffer = 1
+
+" Open a NerdTree if no file is given as CLI argument
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" Close if the only remaining window is a nerdtree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-let NERDTreeShowHidden=1
+nmap <Leader>f :NERDTreeToggle<Enter>
+nnoremap <silent> <Leader>v :NERDTreeFind<CR>
+
+autocmd BufReadPre,FileReadPre * :NERDTreeClose
 
 " =====================   Airline   =====================
 set laststatus=2                                       " Make the second to last line of vim our status line
-let g:airline_theme='lucius'                           " Use lucius theme
 let g:airline#extensions#branch#enabled = 0            " Show the git branch in the status line
 let g:airline#extensions#tabline#show_buffers = 0      " Do not list buffers in the status line
 let g:airline#extensions#whitespace#enabled = 0        " Do not show trailing whitespace errors
 let g:airline#extensions#ctrlp#show_adjacent_modes = 0 " Do not show mru, buffer, etc.
+let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]' "remove annoying uft-8 from status line
+
+let g:airline_theme='tomorrow'
 
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 
-" unicode symbols
+" " unicode symbols
 let g:airline_left_sep = '»'
 let g:airline_left_sep = '▶'
 let g:airline_right_sep = '«'
@@ -212,9 +240,9 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/vendor/*,*/\.git/*
 "======  Ale  =======
 
 let g:airline#extensions#ale#enabled = 1
-let g:ale_linters = { 'jsx': ['eslint'] }
-let g:ale_fixers = {}
-let g:ale_javascript_prettier_options = '--single-quote --arrow-parens'
+let g:ale_linter_aliases = {'jsx': ['javascript']}
+let g:ale_linters = {'jsx': ['eslint']}
+
 let g:ale_fix_on_save = 1
 let g:ale_sign_error = '✖'
 let g:ale_sign_warning = '-'
@@ -230,3 +258,7 @@ let g:ale_pattern_options = {
 
 " ------- Emmet --------
 let g:user_emmet_leader_key='<C-E>'
+
+" prevent :autocmd, shell and write commands from being run inside project-specific .vimrc files unless they’re owned by you.
+" https://andrew.stwrt.ca/posts/project-specific-vimrc/
+set secure
