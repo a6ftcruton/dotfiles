@@ -149,8 +149,9 @@ map <leader>r <Plug>RunMostRecentSpec
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:UltiSnipsSnippetsDir="~/.vim/ultisnips"
-let g:UltiSnipsSnippetDirectories=["ultisnips"]
+" let g:UltiSnipsSnippetsDir="~/.vim/ultisnips"
+" let g:UltiSnipsSnippetDirectories=["ultisnips"]
+" let g:UltiSnipsSnippetsDir="~/dotfiles/UltiSnips"
 
 " =====================   NERDTree   =====================
 " Trigger configuration. Do not use <tab> if 
