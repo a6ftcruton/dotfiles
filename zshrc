@@ -45,29 +45,15 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git bundler)
+plugins=(git bundler vi-mode)
 
 # User configuration
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
-source $ZSH/oh-my-zsh.sh
-
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-eval "$(direnv hook $SHELL)"
-
-export MYSQL=/usr/local/opt/mysql55
-export PATH=$PATH:$MYSQL/bin
-
-export PATH="$HOME/subs/bin:$PATH"
-eval "$($HOME/subs/bin/cu init -)"
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
-
-# spring causing issues with CUC app
-export DISABLE_SPRING=true
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -95,3 +81,8 @@ alias be="bundle exec"
 
 export NVM_DIR="/Users/jimsutton/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+source $ZSH/oh-my-zsh.sh
+

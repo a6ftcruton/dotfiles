@@ -28,6 +28,7 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-markdown'
 Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 Plugin 'cohama/lexima.vim'
 Plugin 'christoomey/vim-tmux-navigator'
@@ -116,7 +117,7 @@ vmap ,rc :s/^#//g<CR>:let @/ = ""<CR>
 map  ,rc :s/^#//g<CR>:let @/ = ""<CR>
 
 set clipboard=unnamed " requires x11 support
-set relativenumber
+set number relativenumber
 set nobackup
 set nowritebackup
 set noswapfile
@@ -140,6 +141,9 @@ map <leader>r <Plug>RunMostRecentSpec
 " =====================   NERDTree   =====================
 " Trigger configuration. Do not use <tab> if 
 " you use https://github.com/Valloric/YouCompleteMe.
+
+
+let g:UltiSnipsSnippetDirectories=[$HOME.'/dotfiles/UltiSnips']
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
