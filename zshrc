@@ -1,7 +1,3 @@
-#Moved this block from zshenv b/c of slow pane movement w/ vim -> tmux
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/jimsutton/.oh-my-zsh
 
@@ -49,7 +45,9 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git bundler)
+plugins=(git vi-mode)
+
+source ~/.bash_profile
 
 # User configuration
 
@@ -88,11 +86,10 @@ alias yolo="rake db:drop; rake db:create; rake db:migrate; rake db:seed"
 alias be="bundle exec"
 alias nombom="rm -rf node_modules bower_components && npm install && bower install"
 # alias ag="ag --path-to-agignore ~/dotfiles/.agignore"
-alias exam="ember exam --split=4 --parallel"
 
 # if you have a json string copied to your clipboard, run it through jq util's pretty print and then copy that output
 # really useful for copying network json payloads to paste into jira/slack snippets/etc.
-alias ppjson="pbpaste | jq . | pbcopy"
+alias ppjson='pbpaste | jq . | pbcopy'
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -105,6 +102,7 @@ source ~/.nvm/nvm.sh
 
 # VIM MODE IN SHELL
 # -----------------
+set -o vi
 bindkey -v
 
 # 200ms delay entering normal mode, allows time for 'jf' -> escape
@@ -277,11 +275,6 @@ function change-around {
 }
 zle -N change-around
 export PATH="/usr/local/sbin:$PATH"
-
-#Get rid of stupid spring in rails forever and ever
-export DISABLE_SPRING=1
-
-export AWS_REGION="us-west-2"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/jimsutton/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/jimsutton/Downloads/google-cloud-sdk/path.zsh.inc'; fi
