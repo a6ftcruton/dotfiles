@@ -85,7 +85,7 @@ export DISABLE_SPRING=true
 alias yolo="rake db:drop; rake db:create; rake db:migrate; rake db:seed"
 alias be="bundle exec"
 alias nombom="rm -rf node_modules bower_components && npm install && bower install"
-# alias ag="ag --path-to-agignore ~/dotfiles/.agignore"
+# alias ag="ag --path-to-ignore ~/dotfiles/.ignore"
 
 # if you have a json string copied to your clipboard, run it through jq util's pretty print and then copy that output
 # really useful for copying network json payloads to paste into jira/slack snippets/etc.

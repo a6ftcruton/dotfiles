@@ -2,7 +2,7 @@ call plug#begin('~/.vim/plugged')
 
 " Searching
 Plug 'rking/ag.vim'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 
 " Vim Looks Layout
@@ -22,11 +22,15 @@ Plug 'honza/vim-snippets'
 Plug 'exvim/ex-indenthtml.vim'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-surround'
+Plug 'vim-scripts/auto-pairs-gentle'
 Plug 'w0rp/ale'
 Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'nathanaelkane/vim-indent-guides'       ",ig
 Plug 'tpope/vim-commentary'                  "gcc
+
+Plug 'sheerun/vim-polyglot'
+Plug 'HerringtonDarkholme/yats.vim'
 
 call plug#end()
 
@@ -106,6 +110,8 @@ if has('nvim')
   augroup neovim_terminal
     autocmd!
 
+    nnoremap <Esc> <C-\><C-n>
+
     " Enter Terminal-mode (insert) automatically
     autocmd TermOpen * startinsert
 
@@ -114,7 +120,34 @@ if has('nvim')
   augroup END
 endif
 
+" =====================   CtrlP   =====================
+let g:ctrlp_buffer_func = {
+    \ 'enter': 'HideStatusBar',
+    \ 'exit':  'UnideStatusBar',
+    \ }
+
+func! HideStatusBar()
+    set laststatus=0
+endfunc
+
+func! UnideStatusBar()
+    set laststatus=2
+endfunc
+
+  "======  CtrlP - performance  =======
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+let g:ctrlp_max_height=35
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g "" --ignore-dir node_modules'
+endif
+if exists("g:ctrl_user_command")
+  unlet g:ctrlp_user_command
+endif
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/vendor/*,*/\.git/*
+
+
 " =====================   GoldenView   =====================
+let g:goldenview__enable_default_mapping = 0           " gimme back ctrlp
 nmap <silent> <C-f>=   <Plug>GoldenViewSwitchMain
 nmap <silent> <C-f>\ <Plug>GoldenViewSwitchToggle
 
@@ -143,6 +176,10 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 autocmd BufReadPre,FileReadPre * :NERDTreeClose
+
+" =====================   Airline   =====================
+" let g:ctrlp_map = '<C-p>'
+" let g:ctrl_cmd = 'CtrlP'
 
 " =====================   Airline   =====================
 let g:airline_theme='angr'
@@ -189,17 +226,6 @@ set list
 " ===== Line Number Toggling ====== "
 let g:NumberToggleTrigger="<F2>"
 
-"======  CtrlP - performance  =======
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-let g:ctrlp_max_height=35
-if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
-if exists("g:ctrl_user_command")
-  unlet g:ctrlp_user_command
-endif
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/vendor/*,*/\.git/*
-
 "======  JSX  =======
 let g:vim_jsx_pretty_colorful_config = 1
 
@@ -214,6 +240,8 @@ highlight ALEError ctermbg=DarkMagenta
 highlight ALEError ctermbg=none cterm=underline 
 highlight ALEWarning ctermbg=none cterm=underline
 
+" let g:ale_linter_aliases = {'jsx': ['javascript'], 'tsx':['typescript']}
+" let g:ale_linters = {'jsx': ['eslint'], 'tsx': ['eslint']}
 let g:ale_linter_aliases = {'jsx': ['javascript']}
 let g:ale_linters = {'jsx': ['eslint']}
 let g:ale_lint_on_text_changed = 'never'
