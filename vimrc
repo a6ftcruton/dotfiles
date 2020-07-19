@@ -5,7 +5,7 @@ Plug 'rking/ag.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 
-" Vim Looks Layout
+" Vim Looks & Layout
 Plug 'flazz/vim-colorschemes'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'vim-airline/vim-airline'
@@ -28,6 +28,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'nathanaelkane/vim-indent-guides'       ",ig
 Plug 'tpope/vim-commentary'                  "gcc
+Plug 'editorconfig/editorconfig-vim'
 
 Plug 'sheerun/vim-polyglot'
 Plug 'HerringtonDarkholme/yats.vim'
@@ -90,10 +91,10 @@ nnoremap <C-H> <C-W><C-H>
 
 " Allow the same window movements from terminal mode
 if has('nvim')
-  tnoremap <C-h> <C-\><C-n><C-w>h  
-  tnoremap <C-l> <C-\><C-n><C-w>l  
-  tnoremap <C-k> <C-\><C-n><C-w>k  
-  tnoremap <C-j> <C-\><C-n><C-w>j  
+  tnoremap <C-h> <C-\><C-n><C-w>h
+  tnoremap <C-l> <C-\><C-n><C-w>l
+  tnoremap <C-k> <C-\><C-n><C-w>k
+  tnoremap <C-j> <C-\><C-n><C-w>j
 endif
 
 " Resize splits Split
@@ -110,7 +111,7 @@ if has('nvim')
   augroup neovim_terminal
     autocmd!
 
-    nnoremap <Esc> <C-\><C-n>
+    tnoremap <Esc> <C-\><C-n>
 
     " Enter Terminal-mode (insert) automatically
     autocmd TermOpen * startinsert
@@ -160,12 +161,13 @@ let g:UltiSnipsSnippetsDir="~/dotfiles/UltiSnips"
 
 " =====================   NERDTree   =====================
 map <C-n> :NERDTreeToggle<CR>
+nmap <silent> <C-f>f :NERDTreeFind<CR>
 
 let g:NERDTreeNodeDelimiter = "\u00a0"
 let NERDTreeShowHidden=1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
-let NERDTreeQuitOnOpen = 1
+" let NERDTreeQuitOnOpen = 1
 let NERDTreeAutoDeleteBuffer = 1
 
 " Open a NerdTree if no file is given as CLI argument
@@ -186,7 +188,7 @@ let g:airline_theme='angr'
 let g:airline_extensions = ['branch']
 let g:airline#extensions#whitespace#enabled = 0              " Do not show trailing whitespace errors
 let g:airline#extensions#ctrlp#show_adjacent_modes = 0       " Do not show mru, buffer, etc.
-let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]' "remove annoying uft-8 from status line
+let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]' " remove annoying uft-8 from status line
 let g:airline#extensions#wordcount#enabled = 0               " who cares how many words you have
 
 " See airline-default-sections
