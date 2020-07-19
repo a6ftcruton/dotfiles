@@ -59,9 +59,6 @@ eval "$(direnv hook $SHELL)"
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# spring causing issues with CUC app
-export DISABLE_SPRING=true
-
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
@@ -272,12 +269,6 @@ function change-around {
 }
 zle -N change-around
 export PATH="/usr/local/sbin:$PATH"
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/jim/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/jim/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/jim/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/jim/google-cloud-sdk/completion.zsh.inc'; fi
 
 export PATH="$PATH:$HOME/scripts"
 

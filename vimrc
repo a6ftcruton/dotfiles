@@ -32,6 +32,7 @@ Plug 'editorconfig/editorconfig-vim'
 
 Plug 'sheerun/vim-polyglot'
 Plug 'HerringtonDarkholme/yats.vim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 
 call plug#end()
 
@@ -156,7 +157,7 @@ nmap <silent> <C-f>\ <Plug>GoldenViewSwitchToggle
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:UltiSnipsSnippetDirectories=[$HOME.'/dotfiles/UltiSnips']
+let g:UltiSnipsSnippetDirectories=[$HOME.'/dotfiles/UltiSnips', 'UltiSnips']
 let g:UltiSnipsSnippetsDir="~/dotfiles/UltiSnips"
 
 " =====================   NERDTree   =====================
