@@ -1,0 +1,4 @@
+*.log
+/features
+*dashboard.js
+*vendor.js
