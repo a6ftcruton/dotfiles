@@ -11,6 +11,8 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'zhaocai/GoldenView.Vim'
+Plug 'junegunn/goyo.vim' " distraction-free vim
+Plug 'junegunn/limelight.vim' " with a hint of lime
 
 " Github
 Plug 'tpope/vim-fugitive', { 'tag': 'v2.3'}
@@ -218,6 +220,10 @@ colorscheme Tomorrow-Night-Eighties
 let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=23
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=236
+
+" ====== Minimal Goodness Together (Goyo + Limelight) ====== "
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
 
 " ====== Search Highlight ====== "
 hi Search cterm=NONE ctermfg=grey ctermbg=blue
