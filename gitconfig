@@ -14,7 +14,7 @@
     cob = checkout -b
     m = merge
     st = status
-    fwl = --force-with-lease
+    pwl = push --force-with-lease
     b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
     hist = log --pretty=format:'%C(yellow)%h %C(white)%ad' --graph --date=short
     l = log --pretty=format:"%C(white)%h\\ %C(magenta)%ad%Cred%d\\ %Creset%s%Cgreen\\ [%cn]" --decorate --date=short
