@@ -24,13 +24,17 @@ Plug 'honza/vim-snippets'
 Plug 'exvim/ex-indenthtml.vim'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-surround'
-Plug 'vim-scripts/auto-pairs-gentle'
-Plug 'w0rp/ale'
-Plug 'pangloss/vim-javascript'
-Plug 'maxmellon/vim-jsx-pretty'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nathanaelkane/vim-indent-guides'       ",ig
 Plug 'tpope/vim-commentary'                  "gcc
 Plug 'editorconfig/editorconfig-vim'
+
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+Plug 'pangloss/vim-javascript'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'jparise/vim-graphql'
 
 Plug 'sheerun/vim-polyglot'
 Plug 'HerringtonDarkholme/yats.vim'
@@ -170,7 +174,6 @@ let g:NERDTreeNodeDelimiter = "\u00a0"
 let NERDTreeShowHidden=1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
-" let NERDTreeQuitOnOpen = 1
 let NERDTreeAutoDeleteBuffer = 1
 
 " Open a NerdTree if no file is given as CLI argument
@@ -183,16 +186,12 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 autocmd BufReadPre,FileReadPre * :NERDTreeClose
 
 " =====================   Airline   =====================
-" let g:ctrlp_map = '<C-p>'
-" let g:ctrl_cmd = 'CtrlP'
-
-" =====================   Airline   =====================
 let g:airline_theme='angr'
 let g:airline_extensions = ['branch']
-let g:airline#extensions#whitespace#enabled = 0              " Do not show trailing whitespace errors
-let g:airline#extensions#ctrlp#show_adjacent_modes = 0       " Do not show mru, buffer, etc.
+let g:airline#extensions#whitespace#enabled = 0 " Do not show trailing whitespace errors
+let g:airline#extensions#ctrlp#show_adjacent_modes = 0 " Do not show mru, buffer, etc.
 let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]' " remove annoying uft-8 from status line
-let g:airline#extensions#wordcount#enabled = 0               " who cares how many words you have
+let g:airline#extensions#wordcount#enabled = 0 " who cares how many words you have
 
 " See airline-default-sections
 let g:airline_section_b = airline#section#create(['branch'])
@@ -238,28 +237,31 @@ let g:NumberToggleTrigger="<F2>"
 "======  JSX  =======
 let g:vim_jsx_pretty_colorful_config = 1
 
-"======  Ale  =======
-let g:airline#extensions#ale#enabled = 1
-let g:ale_fix_on_save = 1
-let g:ale_sign_error = '✖'
-let g:ale_sign_warning = '-'
+"======  CoC  =======
+let g:coc_global_extensions = [
+      \ 'coc-css',
+      \ 'coc-eslint',
+      \ 'coc-html',
+      \ 'coc-json',
+      \ 'coc-python',
+      \ 'coc-tsserver',
+      \ 'coc-yaml'
+\ ]
+set cmdheight=2
+set updatetime=300
+set shortmess+=c
 
-highlight ALEWarning ctermbg=DarkMagenta 
-highlight ALEError ctermbg=DarkMagenta
-highlight ALEError ctermbg=none cterm=underline 
-highlight ALEWarning ctermbg=none cterm=underline
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
 
-" let g:ale_linter_aliases = {'jsx': ['javascript'], 'tsx':['typescript']}
-" let g:ale_linters = {'jsx': ['eslint'], 'tsx': ['eslint']}
-let g:ale_linter_aliases = {'jsx': ['javascript']}
-let g:ale_linters = {'jsx': ['eslint']}
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_enter = 0
-let g:ale_pattern_options = {
-\   '.*cypress/integration/.*\.js$': {'ale_enabled': 0},
-\   '.*cypress/integration/*/.*\.js$': {'ale_enabled': 0},
-\   '.*\.spec.js$': {'ale_enabled': 0},
-\}
+autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 
 " ------- Emmet --------
 let g:user_emmet_leader_key='<C-E>'
