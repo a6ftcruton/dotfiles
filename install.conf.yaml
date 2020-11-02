@@ -9,7 +9,6 @@
     ~/.zshrc: zshrc
     ~/.agignore: agignore
     ~/.gitignore: gitignore
-    ~/.gitconfig: config/.gitconfig
     ~/.config:
       glob: true
       path: config/*
@@ -17,6 +16,7 @@
     ~/.vim:
       glob: true
       path: vim/*
+    ~/.gitconfig: config/.gitconfig
 
 - clean: ['~']
 
