@@ -16,11 +16,11 @@ endfunc
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 let g:ctrlp_max_height=35
 if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g "" --ignore-dir node_modules'
+  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 endif
-if exists("g:ctrl_user_command")
-  unlet g:ctrlp_user_command
-endif
+" if exists("g:ctrl_user_command")
+"   unlet g:ctrlp_user_command
+" endif
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/vendor/*,*/\.git/*
 
 
@@ -35,6 +35,7 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsSnippetDirectories=[$HOME.'/dotfiles/UltiSnips', 'UltiSnips']
 let g:UltiSnipsSnippetsDir="~/dotfiles/UltiSnips"
+
 
 " =====================   NERDTree   =====================
 map <C-n> :NERDTreeToggle<CR>
@@ -115,6 +116,7 @@ let g:coc_global_extensions = [
       \ 'coc-json',
       \ 'coc-python',
       \ 'coc-tsserver',
+      \ 'coc-prettier',
       \ 'coc-yaml'
 \ ]
 set cmdheight=2
