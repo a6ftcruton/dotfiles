@@ -10,5 +10,13 @@
     "typescript",
     "typescript.tsx",
     "typescriptreact"
+  ],
+  "eslint.autoFixOnSave": true,
+  "eslint.filetypes": [
+    "typescript",
+    "javascript",
+    "typescriptreact",
+    "typescript.tsx",
+    "javascriptreact"
   ]
 }
